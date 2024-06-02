@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    // 🔸 JSX
+    // 일반 함수
+    function Title() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log('mouse enter')}>
+          Hello I am a span
+        </h3>
+      );
+    }
+    // 화살표 함수
+    const Button = () => (
+      <button
+        style={{
+          backgroundColor: 'tomato',
+        }}
+        onClick={() => console.log('I am clicked')}
+      >
+        Click me
+      </button>
+    );
+    /* 🔸 createElement를 만드는 오래된 방법
+    const h3 = React.createElement(
+      'h3',
+      {
+        id: 'title',
+        onMouseEnter: () => console.log('mouse enter'),
+      },
+      'Hello I am a span'
+    );
+    const btn = React.createElement(
+      'button',
+      {
+        onClick: () => console.log('I am clicked'),
+        style: {
+          backgroundColor: 'tomato',
+        },
+      },
+      'Click me'
+    ); 
+    */
+
+    // const container = React.createElement('div', null, [h3, btn]);
+    // const container = React.createElement('div', null, [Title, Button]);
+    // ReactDOM.render(container, root);
+
+    // Title, Button를 함수로 만들어 준다
+    // 여러 컴포넌트들이 합쳐진 구성임
+    // <Title /> 꼭 대문자 사용
+    // JSX는 어플리케이션을 여러 가지 작은 요소로 나누어 관리할 수 있게 해줌
+    // 여러 요소로 쪼개서 만들어서 합쳐 줌
+    const Container = () => (
+      <div>
+        <Title /> <Button />
+      </div>
+    );
+    ReactDOM.render(<Container />, root);
+  </script>
+</html>

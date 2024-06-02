@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // useState는 arrayㄹ르 제공, 그리고 그 첫 번째 element가 현재의 값이 됨
+      const [amount, setAmount] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false); // 초기값 false로 시작
+      // 우리가 input에 입력한 값을 state에 전달
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      // inverted값을 반대로 전환시키는 역할
+      const onInvert = () => {
+        reset();
+        setInverted((current) => !current);
+      };
+      return (
+        // class나 for 이런건 자바스크립트에서 이미 사용중이기 때문에 JSX에서는 다른 이름이 필요
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount} // 시 => 분, amount는 입력한 그대로
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange} //데이터를 업데이트 해주는 역할
+              // disabled={inverted === true} // 플립이 동작 되면 입력 창 안되게
+              disabled={inverted} // 짧게
+            />
+            {/*<h4>You want to convert {minutes}</h4>*/}
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 60)} // 분 => 시
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              // disabled={inverted === false} // 플립을 하지 않으면 입력 창 안되게
+              disabled={!inverted} // 짧게
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onInvert}>
+            {inverted ? 'Turn back' : 'Invert'}
+          </button>
+          {/* inverted가 false면 'Invert' 아니라면 'Turn back' */}
+        </div>
+      );
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+
+    // 이 컴포넌트가 리렌더링될 때, 두 번째 이벤트리스너가 등록되거나 Total clicks을 다시 만드는게 아니라
+    // 오로지 달라지는 부분은 {counter} 이 부분이다
+  </script>
+</html>

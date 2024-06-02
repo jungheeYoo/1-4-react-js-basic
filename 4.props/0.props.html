@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 함수형 컴포넌트
+    // 재사용 가능
+    // 컴포넌트는 단지 함수이다. 어떤 JSX를 반환하는 (ex.return <button>Save Change</button>)
+    // props는 첫 번째이자 유일한 인자. Btn이 전달 받는 유일한 인자이다.
+    // function Btn(props) 보통 아래처럼 줄여서 씀 shortcut {
+    // property를 오브젝트로부터 꺼내는 것
+    function Btn({ text, big }) {
+      // console.log(props); // {text: "Save Change", {text: "Continue"}
+      console.log(text, big); // Save Change true, Continue false
+      return (
+        <button
+          style={{
+            backgroundColor: 'tomato',
+            color: 'white',
+            padding: '10px 20px',
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? 18 : 16,
+          }}
+        >
+          {/* {props.text} 아래가 줄임 */}
+          {text}
+        </button>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          {/* 함수 부르는 것 */}
+          {/* 
+            Btn({banana="Save Change"}) 아래와 같음 
+            이 데이터들을 첫 번째 인자로 넣어주는 것임 => props
+            우리가 이쪽에서 보낸 모든 것들을 갖는 오브젝트 
+            props는 오브젝트이다
+        */}
+          <Btn text="Save Change" big={true} />
+          <Btn text="Continue" big={false} />
+        </div>
+      );
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

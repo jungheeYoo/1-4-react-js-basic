@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    // ✅ state 변경하기
+    // 어플리케이션 시작하면 counter는 0
+    let counter = 0;
+    function countUp() {
+      // 4. 클릭하면 counter를 증가 시킴
+      counter = counter + 1;
+      // 5. 카운트 업데이트 해주기 위해서 리렌더한다
+      // Container를 다시 렌더링해주면, 함수가 다시 호출될 거고 counter는 더 이상 0이 아니라 1
+      // 그래서 render() 함수를 만들어 줄 것임
+      // ReactDOM.render(<Container />, root);
+      render(0);
+    }
+    // onClick 이벤트 리스너가 countUp 함수를 호출하고 countUp은 카운트를 바꿔줄 것임
+    // 2. counter는 0
+    // 3. 이벤트 리스너 동작
+
+    function render() {
+      // render함수는 Container 컴포넌트를 root에 담아 줌
+      ReactDOM.render(<Container />, root);
+    }
+
+    // {counter}는 사용자의 화면에 비춰지는 부분
+    const Container = () => (
+      <div>
+        <h3>Total clicks: {counter}</h3>
+
+        <button onClick={countUp}>Click me</button>
+      </div>
+    );
+    // 1. 처음 렌더링 했을 때 카운트 0
+    // ReactDOM.render(<Container />, root);
+    render();
+
+    // 정리하면
+    // react.js는 새로 렌더링하더라도 전체를 전부 재생성할 필요 없이 바뀐 부분만 새로 생성할 수 있다
+    // 1. 어플리케이션이 시작하면 counter는 0이야
+    // 2. render 함수를 실행시키고
+    // 3. render 함수는 Container 컴포넌트를 root에 담아줄 거야
+    // 4. 어플이 막 시작됐을 때의 Container는 Total click을 가지고 있고 counter와 연결돼있어
+    // counter의 초기값은 0이야. 사용자의 화면에 비춰지는 녀석이지
+    // 5. 이벤트리스너를 여기 등록해주면 버튼을 클릭할 때, countUp 함수가 호출될 거야
+    // 6. countUp은 counter를 증가시키고 다시 render를 호출해줄거야
+    // render 함수가 호출되면 똑같은 과정이 반복돼. Container를 root에 담아주겠지
+    // 하지만 이번에는, 우리가 Container를 사용하면
+    // Container 컴포넌트는 업데이트된 counter를 가지고 있을거야
+  </script>
+</html>
