@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById('root');
-    // 🔸 JSX
+    // 🔸 JSX - HTML에서 사용한 문법과 흡사한 문법임
     // 일반 함수
     function Title() {
       return (
@@ -28,33 +28,39 @@
         Click me
       </button>
     );
-    /* 🔸 createElement를 만드는 오래된 방법
-    const h3 = React.createElement(
-      'h3',
-      {
-        id: 'title',
-        onMouseEnter: () => console.log('mouse enter'),
-      },
-      'Hello I am a span'
-    );
-    const btn = React.createElement(
-      'button',
-      {
-        onClick: () => console.log('I am clicked'),
-        style: {
-          backgroundColor: 'tomato',
-        },
-      },
-      'Click me'
-    ); 
-    */
+    // // 강의 2-3
+    // // 🔸 createElement를 만드는 오래된 방법
+    // const h3 = React.createElement(
+    //   'h3',
+    //   {
+    //     id: 'title',
+    //     onMouseEnter: () => console.log('mouse enter'),
+    //   },
+    //   'Hello I am a span'
+    // );
+    // const btn = React.createElement(
+    //   'button',
+    //   {
+    //     // event listener 등록
+    //     onClick: () => console.log('I am clicked'),
+    //     style: {
+    //       backgroundColor: 'tomato',
+    //     },
+    //   },
+    //   // 내부 content
+    //   'Click me'
+    // );
 
     // const container = React.createElement('div', null, [h3, btn]);
     // const container = React.createElement('div', null, [Title, Button]);
     // ReactDOM.render(container, root);
 
+    // 🔸 createElement 대신 JSX를 사용함
+    // Title이나 Button을 포함시키기 위해서는
     // Title, Button를 함수로 만들어 준다
-    // 여러 컴포넌트들이 합쳐진 구성임
+    // 여러 컴포넌트들이 합쳐진 구성을 만들고 있는 것임
+    // 직접 만든 요소는 전부 대문자로 시작해야 함
+    // 소문자를 쓰면 HTML 요소라는 것
     // <Title /> 꼭 대문자 사용
     // JSX는 어플리케이션을 여러 가지 작은 요소로 나누어 관리할 수 있게 해줌
     // 여러 요소로 쪼개서 만들어서 합쳐 줌
