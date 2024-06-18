@@ -7,10 +7,14 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.getElementById('root');
     // ✅ state 변경하기
-    // 어플리케이션 시작하면 counter는 0
+    // 💩방법 1 : 그리 좋지 않은 방식
+    // 😂 왜냐하면 데이터가 바뀔때 마다 잊어버리지 말고 계속 리렌더 해줘야함!
+
+    const root = document.getElementById('root');
+    // 🔸 셋팅 어플리케이션 시작하면 counter는 0
     let counter = 0;
+    // 🔸 카운트 업해주는 함수
     function countUp() {
       // 4. 클릭하면 counter를 증가 시킴
       counter = counter + 1;
@@ -20,15 +24,15 @@
       // ReactDOM.render(<Container />, root);
       render(0);
     }
-    // onClick 이벤트 리스너가 countUp 함수를 호출하고 countUp은 카운트를 바꿔줄 것임
-    // 2. counter는 0
-    // 3. 이벤트 리스너 동작
 
     function render() {
       // render함수는 Container 컴포넌트를 root에 담아 줌
       ReactDOM.render(<Container />, root);
     }
 
+    // onClick 이벤트 리스너가 countUp 함수를 호출하고 countUp은 카운트를 바꿔줄 것임
+    // 2. counter는 0
+    // 3. 이벤트 리스너 동작
     // {counter}는 사용자의 화면에 비춰지는 부분
     const Container = () => (
       <div>
@@ -41,7 +45,7 @@
     // ReactDOM.render(<Container />, root);
     render();
 
-    // 정리하면
+    // ✨ 정리하면
     // react.js는 새로 렌더링하더라도 전체를 전부 재생성할 필요 없이 바뀐 부분만 새로 생성할 수 있다
     // 1. 어플리케이션이 시작하면 counter는 0이야
     // 2. render 함수를 실행시키고
