@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // ✅ State 만들기
+      // state인 minutes를 값으로 리스닝하는 input 두 개 만듦
+      const [minutes, setMinutes] = React.useState(0);
+      // ✅ onChange 함수
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+      };
+      // ✅ reset 함수
+      const reset = () => setMinutes(0);
+      return (
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={minutes}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={Math.round(minutes / 60)} // 분을 시단위로 바꾸기 공식
+              id="hours"
+              placeholder="Hours"
+              type="number"
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+        </div>
+      );
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+
+    // setMinutes(event.target.value); state를 여기서 바꿔주고 있기 때문에
+    // 새로 업데이트 된 값을 가지고, return 안에 있는 코드가 다시 한 번 rendered 됨
+  </script>
+</html>
